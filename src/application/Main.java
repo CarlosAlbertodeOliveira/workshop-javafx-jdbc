@@ -4,7 +4,6 @@ package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
@@ -20,7 +19,7 @@ public class Main extends Application {
 			scrollPane.setFitToWidth(true);
 			Scene scene = new Scene(scrollPane);
 			stage.setScene(scene);
-			stage.setTitle("workshopjavafx");
+			stage.setTitle("Workshop Javafx");
 			stage.show();
 			
 		} catch(Exception e) {
