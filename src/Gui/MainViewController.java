@@ -19,31 +19,31 @@ import javafx.scene.layout.VBox;
 public class MainViewController implements Initializable{
 	
 	@FXML
-	private MenuItem menuItemDepartamento;
+	private MenuItem menuItemDepartment;
 	
 	@FXML
-	private MenuItem menuItemVendedor;
+	private MenuItem menuItemSeller;
 	
 	@FXML
 	private MenuItem menuItemAbout;
 	
 	@FXML
-	public void onMenuItemDepartamentoAction() {
+	public void onMenuItemDepartmentAction() {
 		loadView("/Gui/DepartamentList.fxml");
 	}
 	
 	@FXML
-	public void onMenuItemVendedorAction() {
+	public void onMenuItemSellerAction() {
 		System.out.println("onMenuItemVendedorAction");
 	}
 	
 	@FXML
 	public void onMenuItemAboutAction() {
-		loadView("/Gui/Sobre.fxml");
+		loadView("/Gui/About.fxml");
 	}
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL url, ResourceBundle rb) {
 		// TODO Auto-generated method stub
 	
 	}
