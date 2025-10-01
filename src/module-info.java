@@ -16,5 +16,12 @@ module workshopjavafx {
     opens Gui to javafx.fxml;
 
     exports application;
+    exports db;
     exports Gui;
+    exports Gui.Util;
+    exports model.dao;
+    exports model.entities;
+    exports model.entities.impl;
+    exports model.services;
+    
 }
