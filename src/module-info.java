@@ -10,6 +10,7 @@ module workshopjavafx {
 	requires javafx.base;
 	requires java.sql;
 	requires javafx.graphics;
+	requires java.desktop;
 
     opens application to javafx.graphics, javafx.fxml;
     opens model.entities to javafx.base;

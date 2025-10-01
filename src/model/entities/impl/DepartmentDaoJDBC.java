@@ -25,8 +25,8 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 	public void insert(Department obj) {
 		PreparedStatement ps = null;
 		try {
-			ps = conn.prepareStatement("insert into department (name) value (?)", Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, "name");
+			ps = conn.prepareStatement("insert into department (name) values (?)", Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, obj.getName()); // correção aqui
 			int linhasAfetadas = ps.executeUpdate();
 			if (linhasAfetadas > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
@@ -90,6 +90,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 				Department obj = new Department();
 				obj.setId(rs.getInt("Id"));
 				obj.setName(rs.getString("Name"));
+				return obj; // correção aqui
 			}
 			return null;
 
