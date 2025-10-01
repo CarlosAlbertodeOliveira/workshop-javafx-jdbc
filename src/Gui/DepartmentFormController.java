@@ -1,12 +1,16 @@
 package Gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import Gui.Util.Alerts;
 import Gui.Util.Constraints;
 import Gui.Util.Utils;
+import Gui.listeners.DataChangeListener;
 import db.DbException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -15,13 +19,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Department;
 import model.services.DepartmentService;
-import javafx.event.ActionEvent;
 
 public class DepartmentFormController implements Initializable {
 	
 
 	private Department entity;
 	private DepartmentService service;
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	
 	@FXML
@@ -47,6 +51,11 @@ public class DepartmentFormController implements Initializable {
 		this.service = service;
 	}
 	
+	public void subcribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
+	
+	
 	@FXML
 	public void onbtnSaveAction(ActionEvent event) {
 		if (entity == null) {
@@ -58,12 +67,20 @@ public class DepartmentFormController implements Initializable {
 		try {
 			entity = getFormData();
 			service.saveorUpdate(entity);
+			notifySubcribeDataChangeListener();
 			Utils.currentStage(event).close();
 		} catch (DbException e) {
 			Alerts.showAlerts("error saving department", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 	 
+	private void notifySubcribeDataChangeListener() {
+		for(DataChangeListener Listener : dataChangeListeners) {
+			Listener.onDataChanged();
+		}
+		
+	}
+
 	private Department getFormData() { 
 	    Department obj = new Department();
 	    obj.setId(Utils.tryParseToInt(txtId.getText()));
