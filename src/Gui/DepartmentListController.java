@@ -10,6 +10,7 @@ import Gui.Util.Alerts;
 import Gui.Util.Utils;
 import Gui.listeners.DataChangeListener;
 import application.Main;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +41,8 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	private TableColumn<Department, Integer > tableColumnid;
 	@FXML
 	private TableColumn<Department, String > tableColumnname;
+	@FXML
+	private TableColumn<Department, Department > tableColumnnEDIT;
 	@FXML
 	private Button btNew;
 	
@@ -77,6 +81,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		List<Department> list = service.findAll();
 		obslist = FXCollections.observableArrayList(list);
 		tableViewDepartmentList.setItems(obslist);
+		initEditButtons();
 	}
 	
 	private void createDepartmentForm(Department obj, String absoluteName, Stage parentStage) {
@@ -102,9 +107,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 			Alerts.showAlerts("IO EXCEPTION", "Error loading view", e.getMessage(), AlertType.ERROR);
 			
 		}
-		
-		
-		
+			
 	}
 
 	@Override
@@ -112,4 +115,27 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		updateTableView();
 		
 	}
+	
+	private void initEditButtons() {
+		tableColumnnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnnEDIT.setCellFactory(param -> new TableCell<Department, Department>(){
+			private final Button button = new Button("Editar");
+			
+			protected void  updateItem(Department obj, boolean empty) {
+				super.updateItem(obj, empty);
+				
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+				
+				setGraphic(button);
+				button.setOnAction(
+				event -> createDepartmentForm(
+						obj, "/Gui/DepartmentForm.fxml",Utils.currentStage(event)));
+				
+			}
+		});
+	}
+	
 }

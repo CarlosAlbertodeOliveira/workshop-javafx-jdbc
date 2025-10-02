@@ -85,17 +85,7 @@ public class DepartmentFormController implements Initializable {
 		}
 		
 	}
-
-	/*
-	 * private Department getFormData() { Department obj = new Department();
-	 * obj.setId(Utils.tryParseToInt(txtId.getText()));
-	 * 
-	 * String name = txtName.getText().trim(); if (name.isEmpty()) { throw new
-	 * DbException("O nome do departamento não pode estar vazio"); }
-	 * 
-	 * obj.setName(name); return obj; }
-	 */
-	 
+ 
 	private Department getFormData() {
 		Department obj = new Department();
 		ValidationException exception = new ValidationException("Validation error");
