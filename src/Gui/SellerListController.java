@@ -1,7 +1,7 @@
 package Gui;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -16,7 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +26,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Seller;
 import model.services.SellerService;
@@ -41,7 +45,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 	@FXML
 	private TableColumn<Seller, String> tableColumnnEmail;
 	@FXML
-	private TableColumn<Seller, Date> tableColumnnBirthDate;
+	private TableColumn<Seller, java.util.Date> tableColumnnBirthDate;
 	@FXML
 	private TableColumn<Seller, Double> tableColumnnBaseSalary;
 	@FXML
@@ -53,11 +57,12 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 	private ObservableList<Seller> obslist;
 
+	
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
 		Seller obj = new Seller();
-		createSellerForm(obj, "/Gui/SellerList.fxml", parentStage);
+		createSellerForm(obj, "/Gui/SellerForm.fxml", parentStage);
 	}
 
 	@Override
@@ -75,7 +80,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 		tableColumnname.setCellValueFactory(new PropertyValueFactory<>("name"));
 		tableColumnnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 		tableColumnnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		Utils.formatTableColumnDate(tableColumnnBirthDate, "dd/MM/yyyy");
 		tableColumnnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalary"));
+		Utils.formatTableColumnDouble(tableColumnnBaseSalary, 2);
 
 		Stage stage = (Stage) Main.getScene().getWindow();
 		tableViewSellerList.prefHeightProperty().bind(stage.heightProperty());
@@ -95,28 +102,24 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 	private void createSellerForm(Seller obj, String absoluteName, Stage parentStage) {
 		
-		/*
-		 * FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName)); try
-		 * { Pane pane = loader.load();
-		 * 
-		 * SellerFormController controller = loader.getController();
-		 * controller.setSeller(obj); controller.setSellerService(new SellerService());
-		 * controller.subcribeDataChangeListener(this); controller.updateFormData();
-		 * 
-		 * Stage dialogStage = new Stage();
-		 * dialogStage.setTitle("Entre com os dados do departamento");
-		 * dialogStage.setScene(new Scene(pane)); dialogStage.setResizable(false);
-		 * dialogStage.initOwner(parentStage);
-		 * dialogStage.initModality(Modality.WINDOW_MODAL); dialogStage.showAndWait();
-		 * 
-		 * } catch (IOException e) { Alerts.showAlerts("IO EXCEPTION",
-		 * "Error loading view", e.getMessage(), AlertType.ERROR);
-		 * 
-		 * }
-		 */
-		 
-		 
-
+		
+		  FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName)); try
+		  { Pane pane = loader.load();
+		  
+		  SellerFormController controller = loader.getController();
+		  controller.setSeller(obj); controller.setSellerService(new SellerService());
+		  controller.subcribeDataChangeListener(this); controller.updateFormData();
+		  
+		  Stage dialogStage = new Stage();
+		  dialogStage.setTitle("Entre com os dados do departamento");
+		  dialogStage.setScene(new Scene(pane)); dialogStage.setResizable(false);
+		  dialogStage.initOwner(parentStage);
+		  dialogStage.initModality(Modality.WINDOW_MODAL); dialogStage.showAndWait();
+		  
+		  } catch (IOException e) { Alerts.showAlerts("IO EXCEPTION",
+		  "Error loading view", e.getMessage(), AlertType.ERROR);
+		  
+		  }
 	}
 
 	@Override
@@ -140,7 +143,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 				setGraphic(button);
 				button.setOnAction(
-						event -> createSellerForm(obj, "/Gui/SellerList.fxml", Utils.currentStage(event)));
+						event -> createSellerForm(obj, "/Gui/SellerForm.fxml", Utils.currentStage(event)));
 
 			}
 		});

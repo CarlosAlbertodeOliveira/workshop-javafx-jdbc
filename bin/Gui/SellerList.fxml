@@ -31,10 +31,10 @@
       <TableView fx:id="tableViewSellerList" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="tableColumnid" prefWidth="40.0" text="ID" />
-          <TableColumn fx:id="tableColumnname" prefWidth="150.0" text="NOME" />
-            <TableColumn fx:id="tableColumnnEmail" prefWidth="171.0" text="EMAIL" />
-            <TableColumn fx:id="tableColumnnBirthDate" prefWidth="89.0" text="NASCIMENTO" />
-            <TableColumn fx:id="tableColumnnBaseSalary" prefWidth="62.0" text="SALÁRIO" />
+          <TableColumn fx:id="tableColumnname" prefWidth="143.0" text="NOME" />
+            <TableColumn fx:id="tableColumnnEmail" prefWidth="152.0" text="EMAIL" />
+            <TableColumn fx:id="tableColumnnBirthDate" prefWidth="93.0" text="NASCIMENTO" />
+            <TableColumn fx:id="tableColumnnBaseSalary" prefWidth="84.0" text="SALÁRIO" />
             <TableColumn fx:id="tableColumnnEDIT" prefWidth="141.0" />
             <TableColumn fx:id="tableColumnnREMOVE" prefWidth="75.0" />
             
