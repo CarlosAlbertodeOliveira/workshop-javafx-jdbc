@@ -108,12 +108,12 @@ public class SellerListController implements Initializable, DataChangeListener {
 		  { Pane pane = loader.load();
 		  
 		  SellerFormController controller = loader.getController();
-		  controller.setSeller(obj); controller.setServices(new SellerService(), new DepartmentService());
+		  controller.setSeller(obj); controller.setServices(new DepartmentService(),new SellerService());
 		  controller.subcribeDataChangeListener(this); controller.updateFormData();
 		  controller.loadAssociatedObjects();
 		  
 		  Stage dialogStage = new Stage();
-		  dialogStage.setTitle("Entre com os dados do departamento");
+		  dialogStage.setTitle("Entre com os dados dos Vendedores");
 		  dialogStage.setScene(new Scene(pane)); dialogStage.setResizable(false);
 		  dialogStage.initOwner(parentStage);
 		  dialogStage.initModality(Modality.WINDOW_MODAL); dialogStage.showAndWait();
