@@ -1,7 +1,7 @@
 package Gui;
 
-import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -16,9 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -26,8 +24,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Seller;
 import model.services.SellerService;
@@ -43,6 +39,12 @@ public class SellerListController implements Initializable, DataChangeListener {
 	@FXML
 	private TableColumn<Seller, String> tableColumnname;
 	@FXML
+	private TableColumn<Seller, String> tableColumnnEmail;
+	@FXML
+	private TableColumn<Seller, Date> tableColumnnBirthDate;
+	@FXML
+	private TableColumn<Seller, Double> tableColumnnBaseSalary;
+	@FXML
 	private TableColumn<Seller, Seller> tableColumnnEDIT;
 	@FXML
 	private TableColumn<Seller, Seller> tableColumnnREMOVE;
@@ -55,7 +57,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 	public void onBtNewAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
 		Seller obj = new Seller();
-		createSellerForm(obj, "/Gui/SellerForm.fxml", parentStage);
+		createSellerForm(obj, "/Gui/SellerList.fxml", parentStage);
 	}
 
 	@Override
@@ -71,6 +73,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 	private void initializeNodes() {
 		tableColumnid.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnname.setCellValueFactory(new PropertyValueFactory<>("name"));
+		tableColumnnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		tableColumnnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		tableColumnnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalary"));
 
 		Stage stage = (Stage) Main.getScene().getWindow();
 		tableViewSellerList.prefHeightProperty().bind(stage.heightProperty());
@@ -89,6 +94,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 	}
 
 	private void createSellerForm(Seller obj, String absoluteName, Stage parentStage) {
+		
 		/*
 		 * FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName)); try
 		 * { Pane pane = loader.load();
@@ -108,6 +114,8 @@ public class SellerListController implements Initializable, DataChangeListener {
 		 * 
 		 * }
 		 */
+		 
+		 
 
 	}
 
@@ -132,7 +140,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 				setGraphic(button);
 				button.setOnAction(
-						event -> createSellerForm(obj, "/Gui/SellerForm.fxml", Utils.currentStage(event)));
+						event -> createSellerForm(obj, "/Gui/SellerList.fxml", Utils.currentStage(event)));
 
 			}
 		});
