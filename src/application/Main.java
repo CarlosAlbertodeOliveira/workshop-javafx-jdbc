@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -15,6 +16,10 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Gui/MainView.fxml"));
 			ScrollPane scrollPane = loader.load();
+			Image icon = new Image(getClass().getResourceAsStream("/img/LogLoja.jpg"));
+			stage.getIcons().add(icon);
+			stage.setMaximized(true);
+			 
 			scrollPane.setFitToHeight(true);
 			scrollPane.setFitToWidth(true);
 			scene = new Scene(scrollPane);

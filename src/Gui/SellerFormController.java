@@ -29,6 +29,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.entities.Department;
 import model.entities.Seller;
@@ -175,8 +177,9 @@ public class SellerFormController implements Initializable {
 	
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
+		
 	}
 	
 	private void initializeNodes() {
@@ -239,5 +242,37 @@ public class SellerFormController implements Initializable {
 		 comboBoxDepartment.setButtonCell(factory.call(null));   
 		}
 	
-
+		/*
+		 * public void saveAndCancelImds() { try { // Carrega as imagens do diretório de
+		 * recursos Image imageSave = new
+		 * Image(getClass().getResourceAsStream("/img/save.png")); Image imageCancel =
+		 * new Image(getClass().getResourceAsStream("/img/cancel.png"));
+		 * 
+		 * // Cria os ImageViews com as imagens carregadas ImageView imageSaveView = new
+		 * ImageView(imageSave); ImageView imageCancelView = new ImageView(imageCancel);
+		 * 
+		 * // Ajusta o tamanho das imagens imageSaveView.setFitHeight(30);
+		 * imageSaveView.setFitWidth(30); imageCancelView.setFitHeight(30);
+		 * imageCancelView.setFitWidth(30);
+		 * 
+		 * // Define as imagens nos botões btnSave.setGraphic(imageSaveView);
+		 * btnCancel.setGraphic(imageCancelView);
+		 * 
+		 * } catch (Exception e) { e.printStackTrace(); // Exibe o erro no console se
+		 * algo der errado } }
+		 */
+	
+		
+		/*
+		 * public void saveAndCancelImds() { ImageView imageSave = new
+		 * ImageView("/img/save.png"); ImageView imageCancel = new
+		 * ImageView("/img/cancel.png");
+		 * 
+		 * btnSave.setGraphic(imageSave); btnCancel.setGraphic(imageCancel);
+		 * imageSave.setFitHeight(30); imageSave.setFitWidth(30);
+		 * imageCancel.setFitHeight(30); imageCancel.setFitWidth(30);
+		 * 
+		 * }
+		 */
+		 
 }

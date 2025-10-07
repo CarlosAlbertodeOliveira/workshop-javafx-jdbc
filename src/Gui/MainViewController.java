@@ -15,12 +15,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import model.services.DepartmentService;
 import model.services.SellerService;
 
 public class MainViewController implements Initializable {
-
+	
 	@FXML
 	private MenuItem menuItemDepartment;
 
@@ -29,6 +30,14 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemAbout;
+	
+	 @FXML 
+	 private MenuItem menuItemRegister;
+	 
+	 @FXML 
+	 private MenuItem menuAbout;
+	 
+	 
 
 	@FXML
 	public void onMenuItemDepartmentAction() {
@@ -51,12 +60,13 @@ public class MainViewController implements Initializable {
 		loadView("/Gui/About.fxml", (x) -> {
 		});
 	}
-
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+	   // setBackgroundImageVBox(vboxMain);
+		//menuImgs();
 	}
-
+	
 	private <T> void loadView(String nomeAbsoluto, Consumer<T> initializeAction) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(nomeAbsoluto));
 		try {
@@ -74,5 +84,33 @@ public class MainViewController implements Initializable {
 			Alerts.showAlerts("IO exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
 		}
 	}
+	
+	/*
+	 * private void setBackgroundImageVBox(VBox vbox) { try { Image image = new
+	 * Image(getClass().getResourceAsStream("/img/LojaInformatica.jpg"));
+	 * BackgroundImage backgroundImage = new BackgroundImage(image,
+	 * BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+	 * BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO,
+	 * BackgroundSize.AUTO, false, false, true, true)); vbox.setBackground(new
+	 * Background(backgroundImage)); } catch (Exception e) { e.printStackTrace();
+	 * System.out.println("⚠️ Erro ao carregar imagem de fundo: " + e.getMessage());
+	 * } }
+	 */
+	
+	
+	/*
+	 * public void menuImgs() { ImageView imageRegister = new
+	 * ImageView("/img/register.png"); ImageView imageAbout = new
+	 * ImageView("/img/about.png");
+	 * 
+	 * menuItemRegister.setGraphic(imageRegister);
+	 * menuItemAbout.setGraphic(imageAbout); imageRegister.setFitHeight(30);
+	 * imageRegister.setFitWidth(30); imageAbout.setFitHeight(30);
+	 * imageAbout.setFitWidth(30);
+	 * 
+	 * }
+	 */
+	 
+
 
 }
